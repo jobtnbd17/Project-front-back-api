@@ -12,3 +12,14 @@ npm install express
 ```bash
 npm install cors morgan nodemon
 ```
+
+## Git
+```bash
+git add . 
+git commoit -m ""
+git push
+```
+
+
+## Prisma
+```bash

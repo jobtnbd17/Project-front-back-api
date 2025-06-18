@@ -19,10 +19,15 @@ app.use(express.json()); // read body
 app.use("/api", router);
 app.use("/auth", authRouter);
 
+app.use((error,req,res,next) => {
+  console.log(error.message)
+  res.status(error.code || 500).json({mesage : error.message || "Sometihng wrong"})
+})
+
 //port
 const PORT = 8000;
 
 //start server
 app.listen(8000, () =>
-  console.log(`Server runnig at http://localhost:${PORT}`)
+  console.log(`Server running at http://localhost:${PORT}`)
 );

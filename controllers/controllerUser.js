@@ -1,8 +1,20 @@
+import { createError } from "../utils/createError.js"
 
 
-export const listUser = (req,res) =>{
+export const listUser = (req,res,next) =>{
   //code body
-  res.json({message : "This is all USER"})
+  try {
+    if(true) {
+      createError(400,'Email already exist !!!!!')
+    }else {
+      throw new Error("Password is invalid")
+    }
+    res.json({message : "This is all USER"})
+  } catch (error) {
+    // console.log(error)
+    next(error)
+  }
+  
 }
 
 export const readUSer = (req,res) => {
