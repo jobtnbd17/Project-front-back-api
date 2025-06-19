@@ -6,6 +6,7 @@ import jwt from "jsonwebtoken";
 export const register = async (req, res, next) => {
   try {
     //1. Check body
+   
     console.log(req.body);
     const { email, name, password } = req.body;
 
@@ -60,22 +61,21 @@ export const login = async (req, res, next) => {
 
     //4.check password
     const checkPassword = bcrypt.compareSync(password, user.password);
-    if(!checkPassword){
-      createError(400,"Email or password invalid")
+    if (!checkPassword) {
+      createError(400, "Email or password invalid");
     }
 
     //5.step Generate token
     const payload = {
-      id : user.id,
-      role : user.role,
+      id: user.id,
+      role: user.role,
     };
-    const token = jwt.sign(payload , process.env.SECRET,{expiresIn: "1d"})
+    const token = jwt.sign(payload, process.env.SECRET, { expiresIn: "1d" });
 
-
-    res.json({ 
+    res.json({
       message: `Welcome back ${user.name}`,
-      payload:payload,
-    token : token,
+      payload: payload,
+      token: token,
     });
   } catch (error) {
     next(error);

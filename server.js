@@ -3,6 +3,8 @@ import cors from "cors";
 import morgan from "morgan";
 import router from "./routes/user.js";
 import authRouter from "./routes/auth.js";
+import { error } from "./utils/error.js";
+import notFound from "./utils/notfound.js";
 
 const app = express();
 
@@ -19,10 +21,8 @@ app.use(express.json()); // read body
 app.use("/api", router);
 app.use("/auth", authRouter);
 
-app.use((error,req,res,next) => {
-  console.log(error.message)
-  res.status(error.code || 500).json({mesage : error.message || "Sometihng wrong"})
-})
+app.use(error)
+app.use(notFound)
 
 //port
 const PORT = 8000;

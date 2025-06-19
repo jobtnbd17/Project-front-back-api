@@ -1,5 +1,5 @@
 import express from "express";
-import { createUser, deleteUser, listUser, readUSer, updateUser } from "../controllers/controllerUser.js";
+import { createUser, deleteUser, getMe, listUser, readUSer, updateRoleUser,  } from "../controllers/controllerUser.js";
 import { authCheck } from "../middleware/auth.middleware.js";
 
 //http://localhost:8000
@@ -8,9 +8,11 @@ const router = express.Router();
 
 router.get('/users' ,authCheck , listUser)
 router.get('/user',readUSer)
-router.post('/user/role',createUser)
-router.patch('/user/role/:id',updateUser)
-router.delete('/user/:id',deleteUser)
+router.post('/user/role',authCheck,createUser)
+router.patch('/user/role/:id',authCheck,updateRoleUser)
+router.delete('/user/:id',authCheck,deleteUser)
+
+router.get('/getme',authCheck,getMe)
 
 
 // router.get("/", (req, res) => {
