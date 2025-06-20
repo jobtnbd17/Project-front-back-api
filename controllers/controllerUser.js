@@ -76,9 +76,25 @@ export const getMe = async (req,res,next) => {
       password : true
     }
   })
-  res.json({result : user})
+  res.json({result : user , message : "Backend jaa"})
  } catch (error) {
   next(error)
   console.log(error)
  }
+}
+export const addLocation = async (req,res,next) => {
+  try {
+    console.log("first")
+    const {title ,lat, lng} = req.body
+    const result = await prisma.map.create({
+      data : {
+        title : title,
+        lat : +lat,
+        lng : +lng,
+      }
+    })
+    res.json({message : "Location !!", result : result.data})
+  } catch (error) {
+    next(error)
+  }
 }

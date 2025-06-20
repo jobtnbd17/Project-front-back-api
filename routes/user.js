@@ -1,5 +1,5 @@
 import express from "express";
-import { createUser, deleteUser, getMe, listUser, readUSer, updateRoleUser,  } from "../controllers/controllerUser.js";
+import { addLocation, createUser, deleteUser, getMe, listUser, readUSer, updateRoleUser,  } from "../controllers/controllerUser.js";
 import { authCheck } from "../middleware/auth.middleware.js";
 
 //http://localhost:8000
@@ -14,6 +14,7 @@ router.delete('/user/:id',authCheck,deleteUser)
 
 router.get('/getme',authCheck,getMe)
 
+router.post('/landmark',addLocation)
 
 // router.get("/", (req, res) => {
 //   //code body
